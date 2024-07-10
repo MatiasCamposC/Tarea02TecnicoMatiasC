@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div>
+      <h2>Product</h2>
+    </div>
+    <div>
+      @defer {
+        @if(permisionON){
+            <div class="d-flex justify-content-end pb-2">
+                <button type="button" class="btn btn-primary d-flex align-items-center" (click)="modalForm.show()">
+                  <i class="fa-solid fa-plus white"></i>
+                  <p class="mb-0">Add Product</p>
+                </button>
+              </div> 
+        }
+      <app-product-list [productList]="productService.product$()"
+      [permisionON]="permisionON"/>
+      } @loading (after 100ms; minimum 1s){
+      <app-loader></app-loader>
+      }
+    </div>
+  </div>
+  <app-modal #modalForm>
+    <app-product-form (callParentEvent)="onFormCallEvent($event)" 
+    [title]="'Add Product'"></app-product-form>
+  </app-modal>
